@@ -180,6 +180,7 @@ function attachBrowserEvents(parsec, element) {
 	});
 
 	// Mouse Motion
+	const PIXEL_DENSITY = window.devicePixelRatio;
 	element.addEventListener('mousemove', (event) => {
 		let relative = 0;
 		let x = 0;
@@ -187,12 +188,12 @@ function attachBrowserEvents(parsec, element) {
 
 		if (document.pointerLockElement) {
 			relative = 1;
-			x = event.movementX;
-			y = event.movementY;
+			x = event.movementX * PIXEL_DENSITY;
+			y = event.movementY * PIXEL_DENSITY;
 
 		} else {
-			x = event.clientX;
-			y = event.clientY;
+			x = event.clientX * PIXEL_DENSITY;
+			y = event.clientY * PIXEL_DENSITY;
 		}
 
 		parsec.clientSendMessage({
